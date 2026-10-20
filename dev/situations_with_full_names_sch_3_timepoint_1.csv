@@ -1,0 +1,24 @@
+﻿School,Situation,Name,Description,Abbr,Single_Name
+3,s01,Subject you like,Subject you like,Sbl,Subject_like
+3,s02,Subject you don’t like,Subject you don't like,Sbd,Subject_dont_like
+3,s03,Canteen lunch,Eating lunch in the school canteen,Cnt,Canteen
+3,s04,Lunch not canteen,Eating lunch not in the school canteen,NCn,Not_canteen
+3,s05,Corridors,Getting from one class to the next,Cor,Corridors
+3,s06,Library,Being in the library,Lib,Library
+3,s07Sch3,Quad,Being in the quad,Quad,Quad
+3,s08,Toilets in break,Using the toilets between classes,TlB,Toilets_break
+3,s09,Toilets in class,Using the toilets during class,TlC,Toilets_class
+3,s10,Stairs,Using the stairs between classes,Sta,Stairs_Sch3
+3,s11Sch3,Foyer,Being in the foyer ,Foy,Foyer_Sch3
+3,s12,Commute,Travelling to school or going home,Com,Commute
+3,s13,Exams,Studying for or doing exams or tests,Exm,Exams
+3,s14,Negative peer interaction,A student making fun of someone else,MkF,Negative_peer
+3,s15,Supporting peers,A student helping others,SpF,Support_peer
+3,s16,Student defending others,A student defending others,StD,Student_defending_others
+3,s17,Staff helping others,School staff helping students,Stf,Staff_help
+3,s18,PE getting changed,Getting changed for PE,PECh,PE_getting_changed
+3,s19,PE doing,Doing PE,PEDo,PE_doing
+3,s20,Uniform,Trouble about school uniform,Uni,Uniform
+3,s21,Parents,Talking to your parents,Par,Parents
+3,s22Sch3,Library benches,Being on the benches outside the library,Ben,Library_bench_Sch3
+3,s23Sch3,Coffee bar,Being in the panini bar,Pan,Bar_Sch3
