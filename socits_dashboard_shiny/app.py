@@ -7,14 +7,14 @@
 import random
 import numpy as np
 
-import matplotlib as mpl
-import matplotlib.pyplot as plt
+#import matplotlib as mpl
+#import matplotlib.pyplot as plt
 
 import seaborn as sns
 
 import pandas as pd
 
-import scipy as sp
+#import scipy as sp
 
 from shiny import reactive, Inputs, ui, App, render
 
