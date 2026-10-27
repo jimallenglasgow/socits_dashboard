@@ -120,6 +120,37 @@ print(all_data)
 
 selected_measure="loneliness"
 
+##########################################################
+
+##average measure plots
+
+selected_columns=Heatmap_Data_Wrangling(all_data, selected_measure)
+
+useful_columns_long_df=pd.melt(selected_columns)#, id_vars="grouping_variable")
+
+print("useful_columns_long_df")
+
+print(useful_columns_long_df)
+
+ax=sns.pointplot(useful_columns_long_df, y="variable", x="value", errorbar=None)
+
+#ax=sns.pointplot(all_means, y="variable", x="value")
+
+ax.set_xlabel("Stress")
+
+ax.set_ylabel("")
+
+plt.show()
+
+
+
+
+
+##########################################################
+
+##grouping plots
+
+
 selected_grouping="attendance"
 
 ##and now do the same for adding the classification question
