@@ -123,9 +123,14 @@ app_ui = ui.page_sidebar(
     ui.sidebar(
     
         ui.input_file("input_data", "Choose a file to upload:"),
+        
+        ui.input_text("selected_measure_input", "Selected measure:"),
+        
+        ui.input_text("selected_grouping_input", "Selected grouping:"),
     
-        ui.input_radio_buttons("plot_type", "Type of plot", choices=["Heat", "Bar all", "Bar by identity"]),
-    
+        ui.input_radio_buttons("plot_type", "Type of plot", choices=["Heat", "Average measure by situation", "Average measure by situation and grouping"]),
+        
+        ui.input_action_button("plot_button", "Make plot"),
     ),
     
     ui.output_plot("plot1"),
@@ -145,7 +150,7 @@ def server(input, output, session):
     # render the empty 3D space on app startup, to give the user a sense of what's about
     # to happen when they run the simulation.
     #@reactive.event(ignore_none=False)
-    @reactive.event(input.plot_type, ignore_none=True)
+    @reactive.event(input.plot_button, ignore_none=True)
     
     def plot1():
      
@@ -153,9 +158,11 @@ def server(input, output, session):
         
         ##load in the data
         
-        selected_measure="loneliness"
+        selected_measure=input.selected_measure_input()#"loneliness"
+        
+        print("selected_measure = ", selected_measure)
 
-        selected_grouping="attendance"
+        selected_grouping=input.selected_grouping_input()#"attendance"
         
         all_loaded_file=input.input_data()
                 
@@ -188,6 +195,8 @@ def server(input, output, session):
 
    #             useful_columns_df_wide=useful_columns_df_w_nas.fillna(-1)
    
+                print("selected_measure = ", selected_measure)
+   
                 selected_columns=Heatmap_Data_Wrangling(all_data, selected_measure)
 
                 useful_columns_df=selected_columns.transpose()
@@ -212,7 +221,7 @@ def server(input, output, session):
         
 #        fig.suptitle("SOCITS data")
 
-        if input.plot_type()=="Bar by identity":
+        if input.plot_type()=="Average measure by situation and grouping":
             
             if input.input_data()!=None:
                 
@@ -264,37 +273,17 @@ def server(input, output, session):
 
                 ax.set_ylabel("")
             
-        if input.plot_type()=="Bar all":
+        if input.plot_type()=="Average measure by situation":
             
             if input.input_data()!=None:
                 
-                useful_columns_df=Heatmap_Grouping_Variable(all_data, selected_measure, selected_grouping)
+                selected_columns=Heatmap_Data_Wrangling(all_data, selected_measure)
 
-                print("useful_columns_df")
+                useful_columns_long_df=pd.melt(selected_columns)#, id_vars="grouping_variable")
 
-                print(useful_columns_df)
+                print("useful_columns_long_df")
 
-                grouped_means=useful_columns_df.groupby('grouping_variable').mean()
-
-                #grouped_means.index.head="Identity"
-
-                grouped_means=grouped_means.rename_axis("grouping_variable").reset_index()
-
-                #grouped_means=grouped_means.reset_index(inplace=True)
-
-                print("grouped_means")
-
-                print(grouped_means)
-
-                useful_columns_long_df=pd.melt(grouped_means, id_vars="grouping_variable")
-
-                #fig, ax = plt.subplots(nrows=1, ncols=1)
-
-                #ax=sns.barplot(grouped_means, x="body_mass_g", y="island", hue="Identity")
-
-                #ax=sns.barplot(useful_columns_long_df, x="Situation", y="stress.s", hue="Identity")
-
-#                ax=sns.barplot(useful_columns_long_df, y="variable", x="value", errorbar=None, color="blue")#, hue="Identity")
+                print(useful_columns_long_df)
 
                 ax=sns.pointplot(useful_columns_long_df, y="variable", x="value", errorbar=None)
 
